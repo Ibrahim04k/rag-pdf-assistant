@@ -1,0 +1,366 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [5 0 R 7 0 R 9 0 R 11 0 R] /Count 4 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 6 0 R >>
+endobj
+6 0 obj
+<< /Length 2381 >>
+stream
+q
+0.1 0.25 0.5 rg
+50 740 512 30 re f
+Q
+BT
+/F2 14 Tf
+1 1 1 rg
+60 750 Td
+(Modern Retrieval-Augmented Generation \(RAG\) Architecture) Tj
+ET
+BT
+/F1 9 Tf
+0.4 0.4 0.4 rg
+50 725 Td
+(Technical Whitepaper | Research & Engineering Division | Page 1 of 4) Tj
+ET
+BT
+/F2 11 Tf
+0.1 0.2 0.4 rg
+50 690 Td
+(1. Executive Summary & Overview) Tj
+ET
+BT
+/F1 9.5 Tf
+0.15 0.15 0.15 rg
+50 674 Td
+13 TL
+(Retrieval-Augmented Generation \(RAG\) has emerged as the industry standard) Tj
+T* (architectural pattern for grounding Large Language Models \(LLMs\) in external,) Tj
+T* (proprietary enterprise knowledge bases. While LLMs exhibit remarkable reasoning) Tj
+T* (capabilities, they suffer from two critical limitations: parametric knowledge) Tj
+T* (obsolescence and factual hallucinations. In RAG systems, rather than relying solely on) Tj
+T* (static model weights, dynamic external documents are retrieved at inference time and) Tj
+T* (supplied within the LLM context window as verified evidence.) Tj
+ET
+BT
+/F2 11 Tf
+0.1 0.2 0.4 rg
+50 561 Td
+(2. The Document Ingestion & Chunking Pipeline) Tj
+ET
+BT
+/F1 9.5 Tf
+0.15 0.15 0.15 rg
+50 545 Td
+13 TL
+(The ingestion pipeline transforms raw unstructured documents \(PDFs, Markdown, Docx\)) Tj
+T* (into clean, searchable vectors. The standard recommended chunk size for) Tj
+T* (sentence-transformer architectures is between 500 and 1000 characters, paired with a) Tj
+T* (15% to 20% chunk overlap \(typically 100 to 150 characters\). Recursive character text) Tj
+T* (splitting is preferred because it respects natural paragraph boundaries, sentence) Tj
+T* (stops, and whitespace hierarchy, thereby preserving local context across contiguous) Tj
+T* (chunk boundaries.) Tj
+ET
+BT
+/F2 11 Tf
+0.1 0.2 0.4 rg
+50 432 Td
+(3. Dense Vector Embeddings) Tj
+ET
+BT
+/F1 9.5 Tf
+0.15 0.15 0.15 rg
+50 416 Td
+13 TL
+(Dense embeddings map semantic textual meaning into continuous high-dimensional vector) Tj
+T* (spaces \(e.g., 384 dimensions for all-MiniLM-L6-v2, and 1536 dimensions for OpenAI) Tj
+T* (text-embedding-3-small\). Unlike sparse lexical methods like BM25 which rely on exact) Tj
+T* (keyword matches, dense vectors capture semantic synonyms, cross-lingual equivalence,) Tj
+T* (and conceptual relationships through cosine similarity.) Tj
+ET
+BT
+/F1 8 Tf
+0.5 0.5 0.5 rg
+50 35 Td
+(Smart Document Q&A Assistant Benchmark Dataset - Page 1 of 4 - Confidential & Proprietary) Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 8 0 R >>
+endobj
+8 0 obj
+<< /Length 2271 >>
+stream
+q
+0.1 0.25 0.5 rg
+50 740 512 30 re f
+Q
+BT
+/F2 14 Tf
+1 1 1 rg
+60 750 Td
+(Vector Databases, Indexing, and Retrieval Dynamics) Tj
+ET
+BT
+/F1 9 Tf
+0.4 0.4 0.4 rg
+50 725 Td
+(Technical Whitepaper | Research & Engineering Division | Page 2 of 4) Tj
+ET
+BT
+/F2 11 Tf
+0.1 0.2 0.4 rg
+50 690 Td
+(4. Vector Indexing: FAISS IndexFlatL2 vs. HNSW) Tj
+ET
+BT
+/F1 9.5 Tf
+0.15 0.15 0.15 rg
+50 674 Td
+13 TL
+(Facebook AI Similarity Search \(FAISS\) provides highly optimized vector operations for) Tj
+T* (GPU and CPU architectures. The IndexFlatL2 index performs exhaustive exact Euclidean) Tj
+T* (distance search with zero recall loss, making it optimal for datasets with fewer than) Tj
+T* (50,000 vectors. For web-scale vector search exceeding millions of embeddings,) Tj
+T* (Hierarchical Navigable Small World \(HNSW\) graphs offer logarithmic search complexity) Tj
+T* (O\(log N\) by traversing multi-layer proximity graphs with approximate nearest neighbor) Tj
+T* (\(ANN\) guarantees.) Tj
+ET
+BT
+/F2 11 Tf
+0.1 0.2 0.4 rg
+50 561 Td
+(5. Retrieval Top-K and Similarity Thresholds) Tj
+ET
+BT
+/F1 9.5 Tf
+0.15 0.15 0.15 rg
+50 545 Td
+13 TL
+(Standard RAG configurations query the vector database for the top-k most similar) Tj
+T* (passages \(typically k=3 to k=6\). When cosine similarity falls below a critical) Tj
+T* (threshold \(e.g., 0.45 or distance > 1.10\), the chunks are discarded to prevent context) Tj
+T* (pollution. Context pollution occurs when irrelevant or noisy text confuses the) Tj
+T* (attention mechanism of the generator LLM, leading to degraded synthesis quality.) Tj
+ET
+BT
+/F2 11 Tf
+0.1 0.2 0.4 rg
+50 458 Td
+(6. Two-Stage Retrieval with Cross-Encoder Re-Rankers) Tj
+ET
+BT
+/F1 9.5 Tf
+0.15 0.15 0.15 rg
+50 442 Td
+13 TL
+(Production enterprise systems frequently employ a two-stage retrieval pipeline:) Tj
+T* (bi-encoders \(such as all-MiniLM-L6-v2\) rapidly retrieve the top-50 candidate documents) Tj
+T* (in sub-10ms latency, followed by a computationally heavier cross-encoder \(e.g.,) Tj
+T* (ms-marco-MiniLM-L-6-v2 or Cohere Rerank\) that scores query-document token interactions) Tj
+T* (jointly to select the final top-4 context chunks.) Tj
+ET
+BT
+/F1 8 Tf
+0.5 0.5 0.5 rg
+50 35 Td
+(Smart Document Q&A Assistant Benchmark Dataset - Page 2 of 4 - Confidential & Proprietary) Tj
+ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 10 0 R >>
+endobj
+10 0 obj
+<< /Length 2304 >>
+stream
+q
+0.1 0.25 0.5 rg
+50 740 512 30 re f
+Q
+BT
+/F2 14 Tf
+1 1 1 rg
+60 750 Td
+(Hallucination Mitigation & Prompt Engineering Protocols) Tj
+ET
+BT
+/F1 9 Tf
+0.4 0.4 0.4 rg
+50 725 Td
+(Technical Whitepaper | Research & Engineering Division | Page 3 of 4) Tj
+ET
+BT
+/F2 11 Tf
+0.1 0.2 0.4 rg
+50 690 Td
+(7. Taxonomy of LLM Hallucinations) Tj
+ET
+BT
+/F1 9.5 Tf
+0.15 0.15 0.15 rg
+50 674 Td
+13 TL
+(Hallucinations in generative AI are broadly classified into two categories: Intrinsic) Tj
+T* (hallucinations \(where the generated output directly contradicts verified source) Tj
+T* (context\) and Extrinsic hallucinations \(where the output introduces external claims) Tj
+T* (that cannot be corroborated nor refuted from the source text\). In mission-critical) Tj
+T* (legal, medical, and financial domains, extrinsic hallucinations carry severe) Tj
+T* (compliance risks.) Tj
+ET
+BT
+/F2 11 Tf
+0.1 0.2 0.4 rg
+50 574 Td
+(8. Prompt Engineering Guardrails for Factual Fidelity) Tj
+ET
+BT
+/F1 9.5 Tf
+0.15 0.15 0.15 rg
+50 558 Td
+13 TL
+(To eliminate ungrounded speculation, production system prompts enforce four) Tj
+T* (fundamental constraints: 1\) Absolute domain boundary: The model is explicitly) Tj
+T* (forbidden from utilizing prior parametric memory. 2\) Negative rejection protocol: When) Tj
+T* (source evidence is insufficient, the model must output an exact fallback message. 3\)) Tj
+T* (Atomic citation requirement: Every declarative statement must conclude with an) Tj
+T* (immutable citation bracket [Source: X, Page: Y]. 4\) Low temperature setting: Setting) Tj
+T* (temperature to 0.0 or 0.1 minimizes token sampling stochasticity.) Tj
+ET
+BT
+/F2 11 Tf
+0.1 0.2 0.4 rg
+50 445 Td
+(9. Evaluation Frameworks: RAGAS & TruLens) Tj
+ET
+BT
+/F1 9.5 Tf
+0.15 0.15 0.15 rg
+50 429 Td
+13 TL
+(Modern RAG quality assurance evaluates pipelines across four core metrics:) Tj
+T* (Faithfulness \(is the answer grounded in context?\), Answer Relevance \(does the answer) Tj
+T* (address the user query?\), Context Precision \(are retrieved chunks signal-rich?\), and) Tj
+T* (Context Recall \(did retrieval capture all necessary background knowledge?\). TruLens) Tj
+T* (and RAGAS automate these evaluations.) Tj
+ET
+BT
+/F1 8 Tf
+0.5 0.5 0.5 rg
+50 35 Td
+(Smart Document Q&A Assistant Benchmark Dataset - Page 3 of 4 - Confidential & Proprietary) Tj
+ET
+endstream
+endobj
+11 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 12 0 R >>
+endobj
+12 0 obj
+<< /Length 1932 >>
+stream
+q
+0.1 0.25 0.5 rg
+50 740 512 30 re f
+Q
+BT
+/F2 14 Tf
+1 1 1 rg
+60 750 Td
+(Enterprise Deployment, Security, and Scalability) Tj
+ET
+BT
+/F1 9 Tf
+0.4 0.4 0.4 rg
+50 725 Td
+(Technical Whitepaper | Research & Engineering Division | Page 4 of 4) Tj
+ET
+BT
+/F2 11 Tf
+0.1 0.2 0.4 rg
+50 690 Td
+(10. Latency Optimization and Streaming Inference) Tj
+ET
+BT
+/F1 9.5 Tf
+0.15 0.15 0.15 rg
+50 674 Td
+13 TL
+(User perceived latency is dominated by Time to First Token \(TTFT\). Utilizing modern) Tj
+T* (inference accelerators such as Groq LPU \(Language Processing Unit\) architecture) Tj
+T* (enables generation speeds surpassing 500 tokens per second for Llama-3.3-70B models.) Tj
+T* (Streaming response generation allows client interfaces to render partial answers) Tj
+T* (token-by-token, lowering perceived wait times below 300 milliseconds.) Tj
+ET
+BT
+/F2 11 Tf
+0.1 0.2 0.4 rg
+50 587 Td
+(11. Document Security & Access Control \(RBAC\)) Tj
+ET
+BT
+/F1 9.5 Tf
+0.15 0.15 0.15 rg
+50 571 Td
+13 TL
+(When indexing multi-tenant organizational documentation, vector embeddings must) Tj
+T* (retain metadata tags detailing role-based access control \(RBAC\) permissions. Query) Tj
+T* (filtering is executed at the vector database retrieval stage via metadata) Tj
+T* (pre-filtering, preventing unauthorized documents from ever entering the prompt) Tj
+T* (synthesis context.) Tj
+ET
+BT
+/F2 11 Tf
+0.1 0.2 0.4 rg
+50 484 Td
+(12. Conclusion and Future Directions) Tj
+ET
+BT
+/F1 9.5 Tf
+0.15 0.15 0.15 rg
+50 468 Td
+13 TL
+(The evolution of RAG systems is transitioning toward Agentic RAG, where autonomous) Tj
+T* (agents dynamically decide when to retrieve, execute multi-hop reasoning over) Tj
+T* (heterogeneous graph-vector hybrid stores, and self-reflect on output validity before) Tj
+T* (presenting final conclusions to end users.) Tj
+ET
+BT
+/F1 8 Tf
+0.5 0.5 0.5 rg
+50 35 Td
+(Smart Document Q&A Assistant Benchmark Dataset - Page 4 of 4 - Confidential & Proprietary) Tj
+ET
+endstream
+endobj
+xref
+0 13
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000140 00000 n 
+0000000237 00000 n 
+0000000339 00000 n 
+0000000475 00000 n 
+0000002908 00000 n 
+0000003044 00000 n 
+0000005367 00000 n 
+0000005504 00000 n 
+0000007861 00000 n 
+0000007999 00000 n 
+trailer
+<< /Size 13 /Root 1 0 R >>
+startxref
+9984
+%%EOF
