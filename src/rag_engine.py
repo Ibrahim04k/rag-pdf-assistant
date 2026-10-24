@@ -10,8 +10,12 @@ Description: Retrieval-Augmented Generation (RAG) engine featuring:
 import os
 import re
 import time
+import warnings
 from typing import List, Dict, Any, Optional, Tuple
 from dataclasses import dataclass, field
+
+# Silence benign upstream SDK migration warnings in terminal output
+warnings.filterwarnings("ignore", category=FutureWarning)
 
 # LLM SDK Imports with resilient fallbacks
 try:
