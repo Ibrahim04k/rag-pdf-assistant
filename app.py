@@ -5,6 +5,21 @@ Local Offline Fallback, and Provenance Chunk Inspector.
 """
 
 import os
+import sys
+
+# Auto-relaunch inside Streamlit if executed directly via `python app.py` (e.g. VS Code ▶ Run button)
+if __name__ == "__main__":
+    try:
+        from streamlit.runtime import exists as _st_exists
+        _in_streamlit = _st_exists()
+    except Exception:
+        _in_streamlit = False
+
+    if not _in_streamlit:
+        import subprocess
+        print("Launching Streamlit application in browser...")
+        sys.exit(subprocess.call([sys.executable, "-m", "streamlit", "run", os.path.abspath(__file__)]))
+
 import io
 import time
 import streamlit as st
@@ -178,16 +193,16 @@ with st.sidebar:
     st.subheader("1. LLM Provider")
 
     provider_options = [
+        "Offline Local Mode (No API Key Required)",
         "Google Gemini (Free API)",
-        "Groq Llama-3 (Free API)",
-        "Offline Local Mode (No API Key Required)"
+        "Groq Llama-3 (Free API)"
     ]
 
     selected_provider = st.selectbox(
         "Inference Engine",
         options=provider_options,
         index=0,
-        help="Select between free cloud API tiers or 100% offline local extractive inference."
+        help="Select between 100% offline local inference (no API key required) or free cloud API tiers."
     )
 
     # Dynamic Model Selector
@@ -262,7 +277,11 @@ with st.sidebar:
         st.caption(f"Dense Embeddings: `{DEFAULT_EMBEDDING_MODEL}` (384-d, L2/Cosine normalized).")
 
     # Ingestion Trigger
-    if load_sample or (uploaded_files and st.button("🚀 Process & Index Documents", type="primary", use_container_width=True)):
+    process_btn = st.button("🚀 Process & Index Documents", type="primary", use_container_width=True)
+    if process_btn and not uploaded_files:
+        st.warning("⚠️ Please upload at least one PDF file above, or click '⚡ Load Sample AI Paper' to test instantly!")
+
+    if load_sample or (process_btn and uploaded_files):
         with st.status("Building Vector Index...", expanded=True) as status:
             try:
                 target_sources = []

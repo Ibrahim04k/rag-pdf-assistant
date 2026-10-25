@@ -28,11 +28,6 @@ try:
 except ImportError:
     Groq = None
 
-try:
-    from transformers import pipeline
-except ImportError:
-    pipeline = None
-
 
 @dataclass
 class RetrievedChunk:
@@ -399,24 +394,34 @@ class RAGEngine:
         if provider == "Google Gemini (Free API)":
             active_key = api_key or os.getenv("GEMINI_API_KEY")
             if not active_key:
-                raise ValueError("Gemini API Key missing. Please provide it in the sidebar or in your .env file.")
-            answer = generate_gemini_response(
-                query=user_query,
-                context_blocks=context_blocks,
-                api_key=active_key,
-                model_name=selected_model
-            )
+                fallback_ans = generate_local_extractive_response(user_query, chunks)
+                answer = (
+                    "⚠️ **Gemini API Key Missing**: Please paste your free Gemini API key in the sidebar.\n\n"
+                    f"{fallback_ans}"
+                )
+            else:
+                answer = generate_gemini_response(
+                    query=user_query,
+                    context_blocks=context_blocks,
+                    api_key=active_key,
+                    model_name=selected_model
+                )
 
         elif provider == "Groq Llama-3 (Free API)":
             active_key = api_key or os.getenv("GROQ_API_KEY")
             if not active_key:
-                raise ValueError("Groq API Key missing. Please provide it in the sidebar or in your .env file.")
-            answer = generate_groq_response(
-                query=user_query,
-                context_blocks=context_blocks,
-                api_key=active_key,
-                model_name=selected_model
-            )
+                fallback_ans = generate_local_extractive_response(user_query, chunks)
+                answer = (
+                    "⚠️ **Groq API Key Missing**: Please paste your free Groq API key in the sidebar.\n\n"
+                    f"{fallback_ans}"
+                )
+            else:
+                answer = generate_groq_response(
+                    query=user_query,
+                    context_blocks=context_blocks,
+                    api_key=active_key,
+                    model_name=selected_model
+                )
 
         else:
             # Offline Local Mode
